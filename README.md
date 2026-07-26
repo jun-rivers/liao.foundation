@@ -1,2 +1,2 @@
 # liao.foundation
-LIAO Foundation
+LIAO Foundation landing page. Coming soon.
