@@ -97,6 +97,47 @@
                 font-size: 1.2rem;
             }
         }
+
+        /* Purpose section styles */
+        .full-viewport {
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          background: #ffffff;
+        }
+
+        .purpose-inner {
+          max-width: 1100px;
+          width: 100%;
+          text-align: center;
+        }
+
+        .purpose-heading {
+          font-size: clamp(20px, 4.5vw, 36px);
+          font-weight: 600;
+          line-height: 1.2;
+          color: #0b1220;
+        }
+
+        .purpose-heading .sentence {
+          display: block;
+          opacity: 0;
+          transform: translateY(14px);
+          transition: opacity 600ms cubic-bezier(.2,.9,.3,1), transform 600ms cubic-bezier(.2,.9,.3,1);
+          will-change: opacity, transform;
+          margin: 0.6rem 0;
+          max-width: 48ch;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .purpose-heading .sentence.visible {
+          opacity: 1;
+          transform: none;
+        }
+
     </style>
 </head>
 <body>
@@ -108,5 +149,50 @@
             <h3>Coming Soon</h3>
         </div>
     </div>
+
+    <!-- PURPOSE SECTION (100vh) -->
+    <section id="purpose-section" class="full-viewport" aria-labelledby="purpose-title">
+      <div class="purpose-inner">
+        <h3 id="purpose-title" class="purpose-heading">
+          <span class="sentence">The Liao Foundation works toward a more beautiful, peaceful, and sustainable world.</span>
+          <span class="sentence">The Foundation pursues this vision through supporting change-makers, with no geographical or age restrictions, whose work integrates at least two of the following focus areas: Peace-building, Ecology, Arts &amp; Culture, and Education.</span>
+        </h3>
+      </div>
+    </section>
+
+    <script>
+    // Fade-in sentences when #purpose-section is scrolled into view.
+    (function () {
+      const section = document.getElementById('purpose-section');
+      if (!section) return;
+
+      const sentences = Array.from(section.querySelectorAll('.sentence'));
+      if (!sentences.length) return;
+
+      const animateOnce = true;
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            sentences.forEach((el, i) => {
+              const delay = i * 350;
+              setTimeout(() => el.classList.add('visible'), delay);
+            });
+
+            if (animateOnce) {
+              io.unobserve(section);
+            }
+          } else if (!animateOnce) {
+            sentences.forEach(el => el.classList.remove('visible'));
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.35
+      });
+
+      io.observe(section);
+    })();
+    </script>
 </body>
 </html>
