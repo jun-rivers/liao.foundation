@@ -130,8 +130,10 @@
     <section id="purpose-section" class="purpose-section" aria-labelledby="purpose-title">
       <div class="purpose-inner">
         <h3 id="purpose-title" class="purpose-heading">
-          <span class="sentence">The Liao Foundation works toward a more beautiful, peaceful, and sustainable world</span>
-          <span class="sentence">through supporting change-makers, with no geographical or age restrictions, </span>
+          <span class="sentence">The Liao Foundation works toward a more peaceful, sustainable and beautiful world</span>
+          <span class="sentence">through empowering change-makers, </span>
+          <span class="sentence">from individuals to institutions, </span>
+          <span class="sentence">with no geographical or age restrictions, </span>
           <span class="sentence">whose work integrates at least two of the following focus areas: Peace-building, Ecology, Arts &amp; Culture, and Education.</span>
         </h3>
       </div>
@@ -147,7 +149,7 @@
       const sentences = Array.from(section.querySelectorAll('.sentence'));
       if (!sentences.length) return;
 
-      const animateOnce = true;
+      const animateOnce = false;
       const stagger = 600; // ms between sentences
 
       const io = new IntersectionObserver((entries) => {
